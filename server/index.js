@@ -2,7 +2,7 @@ const express = require('express')
 const bodyParser = require('body-parser')
 const app = express()
 const db = require('./database')
-const port = 3000
+const internal_port = 3000 // defined in docker compose file
 
 
 app.use(bodyParser.json())
@@ -23,6 +23,6 @@ app.put('/users/:id', db.updateUser)
 app.delete('/users/:id', db.deleteUser)
 app.get('/pool', db.getPool)
 
-app.listen(port, () => {
-  console.log(`App running on port ${port}.`)
+app.listen(internal_port, () => {
+  console.log(`App is running on port ${process.env.SERVER_PORT}.`)
 });
